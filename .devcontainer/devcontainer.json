@@ -1,0 +1,21 @@
+{
+  "name": "Windows 11",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "hostRequirements": { "cpus": 8, "memory": "32gb", "storage": "64gb" },
+  "forwardPorts": [8006],
+  "portsAttributes": {
+    "8006": { "label": "Windows", "onAutoForward": "notify" }
+  },
+  "secrets": {
+    "WIN_USERNAME": { "description": "Windows username" },
+    "WIN_PASSWORD": { "description": "Strong Windows password" },
+    "BACKUP_REPO": { "description": "Private repo for backups, owner/name" },
+    "BACKUP_TOKEN": { "description": "Token with Contents read/write on BACKUP_REPO" }
+  },
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y zstd cpu-checker && chmod +x scripts/*.sh",
+  "postStartCommand": "bash scripts/start.sh || true"
+}

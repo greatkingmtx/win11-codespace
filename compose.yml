@@ -1,0 +1,24 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "${WIN_VERSION:-11}"
+      DISK_SIZE: "${DISK_SIZE:-40G}"
+      RAM_SIZE: "${RAM_SIZE:-20G}"
+      CPU_CORES: "${CPU_CORES:-6}"
+      USERNAME: "${WIN_USERNAME:?missing}"
+      PASSWORD: "${WIN_PASSWORD:?missing}"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "127.0.0.1:8006:8006"
+      - "127.0.0.1:3389:3389/tcp"
+    volumes:
+      - "${STORAGE_DIR}:/storage"
+      - "${SHARED_DIR}:/shared"
+    restart: unless-stopped
+    stop_grace_period: 2m

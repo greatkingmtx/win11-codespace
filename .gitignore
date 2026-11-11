@@ -1,0 +1,6 @@
+storage/
+shared/
+*.iso
+*.zst
+*.part*
+.env

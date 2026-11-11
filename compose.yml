@@ -2,6 +2,7 @@ services:
   windows:
     image: dockurr/windows
     container_name: windows
+    network_mode: bridge
     environment:
       VERSION: "${WIN_VERSION:-11}"
       DISK_SIZE: "${DISK_SIZE:-40G}"
@@ -20,5 +21,7 @@ services:
     volumes:
       - "${STORAGE_DIR}:/storage"
       - "${SHARED_DIR}:/shared"
+    dns:
+      - 168.63.129.16
     restart: unless-stopped
     stop_grace_period: 2m

@@ -17,3 +17,4 @@ else
   sudo tailscale up --hostname=win11-codespace
 fi
 tailscale ip -4
+sudo tailscale serve --bg --tcp=3389 tcp://127.0.0.1:3389
